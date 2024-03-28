@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 import bcrypt
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb://localhost:27017/Ecommerce"
@@ -15,7 +16,14 @@ def register_user():
     password = data.get('password')
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
+    max_empid = users.find_one(sort=[("empid", -1)])
+    if max_empid:
+        empid = int(max_empid['empid']) + 1
+    else:
+        empid = 1
+
     user = {
+        'empid' : empid,
         'username': username,
         'password': hashed_password.decode('utf-8'),
     }
@@ -29,12 +37,12 @@ def register_user():
 @app.route('/users/<user_id>', methods=['GET'])
 def get_user(user_id):
     users = mongo.db.users
-    user = users.find_one({'_id': user_id})
+    user = users.find_one({'empid': user_id}, {"_id":0})
     if user:
-        user['_id'] = str(user['_id'])
+        # user['empid'] = str(user['empid'])
         return jsonify(user)
     else:
         return jsonify({'error': 'User not found'}), 404
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5003, debug=True)
