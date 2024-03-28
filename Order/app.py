@@ -19,6 +19,7 @@ def create_order():
     result = orders.insert_one(order)
 
     order['_id'] = str(order['_id'])
+    print("Order Successfully Added")
     return jsonify(order), 201
 
 @app.route('/orders/<order_id>', methods=['GET'])

@@ -11,11 +11,18 @@ mongo = PyMongo(app)
 def register_user():
     users = mongo.db.users
     data = request.get_json()
+    #empid = data.get("empid")
     username = data.get('username')
     password = data.get('password')
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+    
+    min_id = 0
+    res = users.find().sort({"empid":-1}).limit(1)
+    for doc in res:
+        min_id = doc["empid"]
 
     user = {
+        'empid': int(min_id)+1,
         'username': username,
         'password': hashed_password.decode('utf-8'),
     }
@@ -26,15 +33,15 @@ def register_user():
     return jsonify(user), 201
 
 #Get User
-@app.route('/users/<user_id>', methods=['GET'])
-def get_user(user_id):
+@app.route('/users/<emp_id>', methods=['GET'])
+def get_user(emp_id):
     users = mongo.db.users
-    user = users.find_one({'_id': user_id})
+    user = users.find_one({'empid': emp_id}, {"_id":0})
     if user:
-        user['_id'] = str(user['_id'])
+        user['empid'] = str(user['empid'])
         return jsonify(user)
     else:
         return jsonify({'error': 'User not found'}), 404
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    app.run(port=5003, debug=True)
