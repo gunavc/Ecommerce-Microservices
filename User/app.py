@@ -7,6 +7,10 @@ app.config["MONGO_URI"] = "mongodb://localhost:27017/Ecommerce"
 mongo = PyMongo(app)
 
 #Register User
+@app.route("/")
+def hello():
+    return jsonify("Hello world")
+
 @app.route('/users', methods=['POST'])
 def register_user():
     users = mongo.db.users
@@ -19,10 +23,10 @@ def register_user():
     min_id = 0
     res = users.find().sort({"empid":-1}).limit(1)
     for doc in res:
-        min_id = doc["empid"]
+        min_id = int(doc["empid"])
 
     user = {
-        'empid': int(min_id)+1,
+        'empid': min_id+1,
         'username': username,
         'password': hashed_password.decode('utf-8'),
     }
@@ -44,4 +48,4 @@ def get_user(emp_id):
         return jsonify({'error': 'User not found'}), 404
 
 if __name__ == '__main__':
-    app.run(port=5003, debug=True)
+    app.run(host="0.0.0.0", port=5003, debug=True)
