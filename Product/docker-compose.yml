@@ -3,10 +3,9 @@ services:
   app:
     build: .
     ports:
-      - "5003:5003"
+      - "5001:5001"
     environment:
       - MONGO_URI=mongodb://mongodb:27017/Ecommerce
-      #- MONGO_URI=mongodb://localhost:27017/Ecommerce
     depends_on:
       - mongodb
 

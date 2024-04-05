@@ -2,7 +2,7 @@
 FROM python:3.9
 
 #Creating a working directory
-WORKDIR /product_app_app
+WORKDIR /product_app
 
 #Adding the requirement.txt file
 COPY ./requirements.txt /product_app
