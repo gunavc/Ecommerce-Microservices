@@ -1,15 +1,34 @@
 from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 import bcrypt
+import os
+import pymongo.errors
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = "mongodb://localhost:27017/Ecommerce"
+app.config["MONGO_URI"] = os.environ.get("MONGO_URI", "mongodb://localhost:27017/Ecommerce")
 mongo = PyMongo(app)
+
+# try:
+#     mongo.db.command('ping')
+#     print("MongoDB Connection Successful!")
+# except pymongo.errors.ConnectionFailure:
+#     print("MongoDB Connection Failed!")
 
 #Register User
 @app.route("/")
 def hello():
     return jsonify("Hello world")
+
+@app.route('/check')
+def check():
+    a = 0
+    try:
+        mongo.db.command('ping')
+        print("MongoDB Connection Successful!")
+        a = 1
+    except pymongo.errors.ConnectionFailure:
+        print("MongoDB Connection Failed!")
+    return jsonify(a)
 
 @app.route('/users', methods=['POST'])
 def register_user():
@@ -37,7 +56,7 @@ def register_user():
     return jsonify(user), 201
 
 #Get User
-@app.route('/users/<emp_id>', methods=['GET'])
+@app.route('/users/<int:emp_id>', methods=['GET'])
 def get_user(emp_id):
     users = mongo.db.users
     user = users.find_one({'empid': emp_id}, {"_id":0})
