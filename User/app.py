@@ -5,7 +5,8 @@ import os
 import pymongo.errors
 
 app = Flask(__name__)
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI", "mongodb://localhost:27017/Ecommerce")
+app.config["MONGO_URI"] = "mongodb://mongo:27017/Ecommerce"
+#os.environ.get("MONGO_URI", "mongodb://localhost:27017/Ecommerce")
 mongo = PyMongo(app)
 
 # try:
