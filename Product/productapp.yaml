@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: productapp
-          image: gunavc/productapp-python1.0.0
+          image: gunavc/productapp-python:1.0.0
           ports:
             - containerPort: 5001
           imagePullPolicy: Always
