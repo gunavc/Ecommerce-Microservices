@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orderapp
+  labels:
+    app: orderapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: orderapp
+  template:
+    metadata:
+      labels:
+        app: orderapp
+    spec:
+      containers:
+        - name: orderapp
+          image: gunavc/orderapp-python:1.0.0
+          ports:
+            - containerPort: 5002
+          imagePullPolicy: Always
