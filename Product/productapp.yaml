@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: productapp
+  labels:
+    app: productapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: productapp
+  template:
+    metadata:
+      labels:
+        app: productapp
+    spec:
+      containers:
+        - name: productapp
+          image: gunavc/productapp-python1.0.0
+          ports:
+            - containerPort: 5001
+          imagePullPolicy: Always
