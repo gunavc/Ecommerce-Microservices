@@ -7,8 +7,8 @@ node {
 
 
     stage("Docker build"){
-        sh 'docker build -t gunavc/userapp-python:latest -f User/Dockerfile .'
-        // sh 'docker image list'
+        //sh 'docker build -t gunavc/userapp-python:latest -f User/Dockerfile .'
+        sh 'docker image list'
         // sh 'docker tag jhooq-docker-demo subhasmita17/jhooq-docker-demo:jhooq-docker-demo'
     }
 
