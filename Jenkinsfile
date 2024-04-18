@@ -21,7 +21,7 @@ node {
 
     stage("Deploy to Kubernetes"){
         sh 'kubectl rollout restart deployment/userapp'
-        sh 'kubectl rollout restart service/userapp-svc'
+        // sh 'kubectl rollout restart service/userapp-svc'
     }
 
 }
