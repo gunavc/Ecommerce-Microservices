@@ -15,7 +15,7 @@ node {
 
     stage("Push Image to Docker Hub"){
         withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
-        sh 'docker login -u subhasmita17 -p $PASSWORD'
+        sh 'docker login -u gunavc -p $PASSWORD'
     }
         sh 'docker push  gunavc/userapp-python:latest'
     }
