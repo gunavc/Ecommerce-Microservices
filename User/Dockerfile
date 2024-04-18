@@ -11,7 +11,7 @@ COPY ./User/requirements.txt /user_app
 RUN pip install --no-cache-dir -r requirements.txt
 
 #Adding all the files into docker
-COPY . .
+COPY /User .
 
 #Setting flask ENV
 ENV FLASK_APP=app.py
