@@ -20,27 +20,10 @@ node {
     }
 
     stage("Deploy to Kubernetes"){
-        sh 'kubectl delete -f User/userapp.yaml'
-        sh 'kubectl delete -f User/userapp-svc.yaml'
+        // sh 'kubectl delete -f User/userapp.yaml'
+        // sh 'kubectl delete -f User/userapp-svc.yaml'
         sh 'kubectl create -f User/userapp.yaml'
         sh 'kubectl create -f User/userapp-svc.yaml'
     }
-
-    // stage("SSH Into k8s Server") {
-    //     def remote = [:]
-    //     remote.name = 'K8S master'
-    //     remote.host = '100.0.0.2'
-    //     remote.user = 'vagrant'
-    //     remote.password = 'vagrant'
-    //     remote.allowAnyHosts = true
-
-    //     stage('Put k8s-spring-boot-deployment.yml onto k8smaster') {
-    //         sshPut remote: remote, from: 'k8s-spring-boot-deployment.yml', into: '.'
-    //     }
-
-    //     stage('Deploy spring boot') {
-    //       sshCommand remote: remote, command: "kubectl apply -f k8s-spring-boot-deployment.yml"
-    //     }
-    // }
 
 }
