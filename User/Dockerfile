@@ -5,7 +5,7 @@ FROM python:3.9
 WORKDIR /user_app
 
 #Adding the requirement.txt file
-COPY ./requirements.txt /user_app 
+COPY ./User/requirements.txt /user_app 
 
 #Installing all the requirements
 RUN pip install --no-cache-dir -r requirements.txt
