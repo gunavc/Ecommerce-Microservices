@@ -20,11 +20,8 @@ node {
     }
 
     stage("Deploy to Kubernetes"){
-        // sh 'kubectl delete -f User/userapp.yaml'
-        // sh 'kubectl delete -f User/userapp-svc.yaml'
-        // sh 'kubectl create -f User/userapp.yaml'
-        // sh 'kubectl create -f User/userapp-svc.yaml'
         sh 'kubectl rollout restart deployment/userapp'
+        sh 'kubectl rollout restart service/userapp-svc'
     }
 
 }
