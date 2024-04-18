@@ -20,6 +20,13 @@ node {
         sh 'docker push  gunavc/userapp-python:latest'
     }
 
+    stage("Deploy to Kubernetes"){
+        sh 'kubectl delete -f User/userapp.yaml'
+        sh 'kubectl delete -f userapp-svc.yaml'
+        sh 'kubectl create -f User/userapp.yaml'
+        sh 'kubectl create -f User/userapp-svc.yaml'
+    }
+
     // stage("SSH Into k8s Server") {
     //     def remote = [:]
     //     remote.name = 'K8S master'
