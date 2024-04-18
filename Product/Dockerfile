@@ -5,13 +5,13 @@ FROM python:3.9
 WORKDIR /product_app
 
 #Adding the requirement.txt file
-COPY ./requirements.txt /product_app
+COPY ./Product/requirements.txt /product_app
 
 #Installing all the requirements
 RUN pip install --no-cache-dir -r requirements.txt
 
 #Adding all the files into docker
-COPY . .
+COPY ./Product .
 
 #Setting flask ENV
 ENV FLASK_APP=app.py
