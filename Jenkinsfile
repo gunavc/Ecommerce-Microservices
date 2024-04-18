@@ -20,19 +20,21 @@ node {
     }
 
     stage("Deploy to Kubernetes"){
-        sh 'kubectl delete -f User/userapp.yaml'
-        sh 'kubectl delete -f User/userapp-svc.yaml'
-        sh 'kubectl delete -f Product/productapp.yaml'
-        sh 'kubectl delete -f Product/productapp-svc.yaml'
-        sh 'kubectl delete -f Order/orderapp.yaml'
-        sh 'kubectl delete -f Order/orderapp-svc.yaml'
-        sh 'kubectl create -f User/userapp.yaml'
-        sh 'kubectl create -f User/userapp-svc.yaml'
-        sh 'kubectl create -f Product/productapp.yaml'
-        sh 'kubectl create -f Product/productapp-svc.yaml'
-        sh 'kubectl create -f Order/orderapp.yaml'
-        sh 'kubectl create -f Order/orderapp-svc.yaml'
-        // sh 'kubectl rollout restart deployment/userapp'
+        // sh 'kubectl delete -f User/userapp.yaml'
+        // sh 'kubectl delete -f User/userapp-svc.yaml'
+        // sh 'kubectl delete -f Product/productapp.yaml'
+        // sh 'kubectl delete -f Product/productapp-svc.yaml'
+        // sh 'kubectl delete -f Order/orderapp.yaml'
+        // sh 'kubectl delete -f Order/orderapp-svc.yaml'
+        // sh 'kubectl create -f User/userapp.yaml'
+        // sh 'kubectl create -f User/userapp-svc.yaml'
+        // sh 'kubectl create -f Product/productapp.yaml'
+        // sh 'kubectl create -f Product/productapp-svc.yaml'
+        // sh 'kubectl create -f Order/orderapp.yaml'
+        // sh 'kubectl create -f Order/orderapp-svc.yaml'
+        sh 'kubectl rollout restart deployment/userapp'
+        sh 'kubectl rollout restart deployment/productapp'
+        sh 'kubectl rollout restart deployment/orderapp'
     }
 
 }
