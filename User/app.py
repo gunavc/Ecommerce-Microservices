@@ -18,7 +18,7 @@ mongo = PyMongo(app)
 #Register User
 @app.route("/")
 def hello():
-    return jsonify("Hello world sbsdf")
+    return jsonify("Hello world")
 
 @app.route('/check')
 def check():
