@@ -11,11 +11,12 @@ node {
         // sh 'docker tag jhooq-docker-demo subhasmita17/jhooq-docker-demo:jhooq-docker-demo'
     }
 
-    withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
-        sh 'docker login -u subhasmita17 -p $PASSWORD'
-    }
+    
 
     stage("Push Image to Docker Hub"){
+        withCredentials([string(credentialsId: 'DOCKER_HUB_PASSWORD', variable: 'PASSWORD')]) {
+        sh 'docker login -u subhasmita17 -p $PASSWORD'
+    }
         sh 'docker push  gunavc/userapp-python:latest'
     }
 
