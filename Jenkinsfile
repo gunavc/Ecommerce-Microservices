@@ -24,7 +24,7 @@ node {
         // sh 'kubectl delete -f User/userapp-svc.yaml'
         // sh 'kubectl create -f User/userapp.yaml'
         // sh 'kubectl create -f User/userapp-svc.yaml'
-        sh 'kubectl rolloout restart deployment/userapp'
+        sh 'kubectl rollout restart deployment/userapp'
     }
 
 }
