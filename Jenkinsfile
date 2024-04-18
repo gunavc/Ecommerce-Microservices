@@ -8,7 +8,6 @@ node {
 
     stage("Docker build"){
         sh 'docker build -t gunavc/userapp-python:latest -f User/Dockerfile .'
-        // sh 'docker tag jhooq-docker-demo subhasmita17/jhooq-docker-demo:jhooq-docker-demo'
     }
 
     
@@ -22,7 +21,7 @@ node {
 
     stage("Deploy to Kubernetes"){
         sh 'kubectl delete -f User/userapp.yaml'
-        sh 'kubectl delete -f userapp-svc.yaml'
+        sh 'kubectl delete -f User/userapp-svc.yaml'
         sh 'kubectl create -f User/userapp.yaml'
         sh 'kubectl create -f User/userapp-svc.yaml'
     }
