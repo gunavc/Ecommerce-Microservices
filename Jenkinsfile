@@ -2,7 +2,7 @@ node {
 
      stage("Git Clone"){
  
-         git branch: 'main' credentialsId: 'GITHUB_LOGIN_CREDENTIALS', url: 'https://github.com/gunavc/Ecommerce-Microservices.git'
+        git branch: 'main' credentialsId: 'GITHUB_LOGIN_CREDENTIALS', url: 'https://github.com/gunavc/Ecommerce-Microservices.git'
     }
 
 
